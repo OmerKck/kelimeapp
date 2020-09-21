@@ -7,6 +7,7 @@ import { Home, Login, Register } from "./pages";
 const App = () => {
   return (
     <div>
+      {/* sadasdsadasdasdas */}
       <BrowserRouter>
         <Switch>
           <PrivateRoute path="/" exact component={Home} />
