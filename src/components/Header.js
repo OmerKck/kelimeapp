@@ -9,8 +9,8 @@ let name;
 useEffect(()=>{
 
 if (user){
-  user =JSON.parse(localStorage.user)
-  name = user.name
+  //user =JSON.parse(localStorage.user)
+  //name = user.name
 }
 else{
   name =''
