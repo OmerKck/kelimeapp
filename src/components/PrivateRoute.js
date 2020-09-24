@@ -11,7 +11,6 @@ const PrivateRoute = (props) => {
     checkToken()
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
           setIsAuth(true);
           localStorage.setItem("user", JSON.stringify(res.data));
         }

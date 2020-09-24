@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 const Header = () => {
+  const history = useHistory();
   const [name, setName] = useState("");
 
-  const history = useHistory();
-
   useEffect(() => {
+    console.log("start");
     if (localStorage.user) {
+      console.log("end");
       setName(JSON.parse(localStorage.user).name);
     }
-  }, []);
+    console.log("finish");
+  }, [name]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setName("kullanici");
+    // setName("kullanıcı");
     history.push("/login");
   };
 

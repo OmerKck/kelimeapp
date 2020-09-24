@@ -1,10 +1,13 @@
-import React from "react";
-import Header from "../../components/Header";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../components/SideBar";
 
-const user = JSON.parse(localStorage.user);
-
 const Home = () => {
+  const [user, setuser] = useState("");
+  useEffect(() => {
+    if (localStorage.user) {
+      setuser(JSON.parse(localStorage.user));
+    }
+  }, []);
   return (
     <div>
       <div className="row">
