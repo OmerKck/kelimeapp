@@ -6,9 +6,10 @@ const Header = () => {
   const [name, setName] = useState("");
 
   useEffect(() => {
-    console.log("start");
+    console.log("2-header");
+
     if (localStorage.user) {
-      console.log("end");
+      console.log("ife girdi");
       setName(JSON.parse(localStorage.user).name);
     }
     console.log("finish");
@@ -17,7 +18,7 @@ const Header = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    // setName("kullanıcı");
+    setName("kullanıcı");
     history.push("/login");
   };
 
@@ -61,7 +62,7 @@ const Header = () => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {name}
+              {name && name}
             </a>
             <div
               className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"

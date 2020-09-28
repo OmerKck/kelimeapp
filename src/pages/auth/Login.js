@@ -30,6 +30,8 @@ const Login = () => {
     login(email, password)
       .then((res) => {
         localStorage.setItem("token", res.data.access_token);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        console.log("1-login");
         history.push("/");
       })
       .catch((err) => {
@@ -151,6 +153,8 @@ const Login = () => {
                     type="text"
                     id="login-username"
                     name="email"
+                    //TODO:Canlıya alırken aktif et
+                    // autoComplete="off"
                     className="form-control"
                     onChange={(e) => handleChangeInput(e)}
                     required
