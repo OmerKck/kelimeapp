@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <nav className="mb-1 navbar navbar-expand-lg navbar-dark primary-color darken-2">
       <a className="navbar-brand" href="!#">
-        Navbar
+        Kelime Savaşı
       </a>
       <button
         className="navbar-toggler"
@@ -42,7 +42,7 @@ const Header = () => {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
             <a className="nav-link" href="!#">
-              Home
+              Anasayfa
               <span className="sr-only">(current)</span>
             </a>
           </li>

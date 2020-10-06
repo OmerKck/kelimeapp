@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom";
 import toast from "izitoast";
 import { login } from "../../service/kelimeApiService";
 
-const Login = () => {
+const Login = () => 
+{
   const [values, setValues] = useState({ email: "", password: "" });
   const { email, password } = values;
   const history = useHistory();
@@ -43,43 +44,7 @@ const Login = () => {
       });
   };
   return (
-    // <div className="container">
-    //   <div className="card mt-5 ">
-    //     <div className="card-header text-center">Kelime Savaşı</div>
-    //     <div className="card-body">
-    //       <form onSubmit={(e) => handleSubmit(e)}>
-    //         <div className="form-group">
-    //           <label htmlFor="">E-mail</label>
-    //           <input
-    //             type="email"
-    //             className="form-control"
-    //             placeholder="Email Giriniz"
-    //             name="email"
-    //             onChange={(e) => handleChangeInput(e)}
-    //             required
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <label htmlFor="">Şifre</label>
-    //           <input
-    //             type="password"
-    //             className="form-control"
-    //             placeholder="Şifrenizi Giriniz"
-    //             name="password"
-    //             onChange={(e) => handleChangeInput(e)}
-    //           />
-    //         </div>
-    //         <div className="form-group">
-    //           <button className="btn btn-success">Giriş</button>
-    //         </div>
-    //         <div className="form-group">
-    //           Henüz Üye Değilmisiniz?
-    //           <Link to="/register">Üye olmak için TIKLAYIN.</Link>
-    //         </div>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </div>
+  
     <div className="landing">
       {/* LANDING DECORATION */}
       <div className="landing-decoration" />

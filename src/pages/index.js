@@ -1,3 +1,12 @@
 export { default as Login } from "./auth/Login";
 export { default as Register } from "./auth/Register";
 export { default as Home } from "./home/Home";
+export { default as AdminLogin } from "./admin/AdminLogin";
+export { default as AdminHome } from "./admin/AdminHome";
+export { default as AdminRegiser } from "./admin/AdminLogin";
+export { default as CategoryHome } from "./admin/category/CategoryHome";
+export { default as CategoryCreate } from "./admin/category/CategoryCreate";
+export { default as CategoryUpdate } from "./admin/category/CategoryUpdate";
+export { default as QuestionHome } from "./admin/question/QuestionHome";
+export { default as QuestionCreate } from "./admin/question/QuestionCreate";
+export { default as QuestionUpdate } from "./admin/question/QuestionUpdate";
