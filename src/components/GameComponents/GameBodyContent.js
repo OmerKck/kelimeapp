@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { showQuestionToast } from "../../helpers/toast";
 import { getQuestions } from "../../service/kelimeApiService";
-import { motion } from "framer-motion";
+import AnswersItem from "./AnswersItem";
+
 const GameBodyContent = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [loading, setIsLoading] = useState(false);
-
-  const [tempAnswers, setTempAnswers] = useState([]);
 
   const [state, setState] = useState({
     questions: [],
@@ -16,24 +16,32 @@ const GameBodyContent = () => {
 
   useEffect(() => {
     getQuestions().then((res) => {
+      console.log("answerlar", res.data.data[114].answers);
       setState((prev) => ({ ...prev, questions: res.data.data }));
     });
   }, []);
 
   const addAnswer = (ans) => {
     const status = isTrue(ans) === undefined ? false : true;
-    const temp = [...answers];
-    console.log("ANS", answers);
-    temp.push({ title: ans, status });
+
     setState((prev) => ({
       ...prev,
-      answers: temp,
+      answers: [...prev.answers, { title: ans, status }],
     }));
 
-    console.log("TEMP", temp);
-    setTempAnswers(temp);
-    console.log("stateAnswer", answers);
-    console.log("tempAnswers", tempAnswers);
+    const trueAnswer = answers.filter((a) => a.status).length;
+    console.log("trueanswer", trueAnswer);
+
+    if (trueAnswer === questions[questionIndex].answers.length) {
+      alert("asdsad");
+      showQuestionToast(
+        "Hey",
+        "Sonraki soruya gecmek ister misiniz ?",
+        null,
+        handleToastQuestion(),
+        null
+      );
+    }
   };
   const handleSubmit = () => {
     addAnswer(userAnswer);
@@ -62,10 +70,21 @@ const GameBodyContent = () => {
     });
 
     const botAnswer = tempArr[Math.floor(Math.random() * tempArr.length)];
-    console.log("BOTAnswers", botAnswer);
+
     addAnswer(botAnswer);
   };
 
+  const handleToastQuestion = () => {
+    if (questionIndex < questions.length) {
+      // state((prev) => prev + 1);
+
+      // setState((prev) => ({ ...prev, questionIndex }));
+      
+      // setAnswer("");
+    } else {
+      console.log("alert");
+    }
+  };
   return (
     <div>
       {/* Game Question Box start */}
@@ -116,41 +135,9 @@ const GameBodyContent = () => {
             )}
           </div>
 
-          <ul>
-            {answers.map((answer, index) => (
-              <li
-                style={{
-                  fontFamily: "cursive",
-                  border: "1px solid gray",
-                  backgroundColor: "#F8EFBA",
-                  maxWidth: "100%",
-                  textAlign: "center",
-                  borderRadius: 10,
-                  color: "black",
-                  marginTop: 20,
-                  minWidth: 300,
-                }}
-                key={index}
-              >
-                <div className=" d-flex justify-content-around align-items-center">
-                  <img
-                    src="https://img.icons8.com/bubbles/100/000000/administrator-male.png"
-                    className="img-lg rounded-circle mb-2"
-                    alt="profile image"
-                    style={{ width: 50 }}
-                  />
-                  {answer.title}
-
-                  <i
-                    className={`fa d-inline-flex bg-${
-                      answer.status ? "success fa-check" : "danger fa-trash"
-                    } `}
-                    aria-hidden="true"
-                  ></i>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {answers.map((answer, index) => (
+            <AnswersItem key={index} answer={answer} index={index} />
+          ))}
         </div>
       </div>
       <div className="row">
