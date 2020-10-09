@@ -22,7 +22,7 @@ const GameHeader = () => {
             <img
               src="https://img.icons8.com/bubbles/100/000000/administrator-male.png"
               className="img-lg rounded-circle mb-2"
-              alt="profile image"
+              alt="profile"
             />
           </div>
           <div className="d-flex justify-content-center align-items-center ml-3 text-center ">
@@ -65,7 +65,7 @@ const GameHeader = () => {
             <img
               src="https://img.icons8.com/bubbles/100/000000/indian-lady.png"
               className="img-lg rounded-circle mb-2"
-              alt="profile image"
+              alt="profile"
             />
           </div>
         </div>

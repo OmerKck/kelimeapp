@@ -9,41 +9,55 @@ const GameBodyContent = () => {
 
   const [state, setState] = useState({
     questions: [],
-    questionIndex: 114,
+    questionIndex: 106,
     answers: [],
   });
   const { questions, questionIndex, answers } = state;
 
   useEffect(() => {
     getQuestions().then((res) => {
-      console.log("answerlar", res.data.data[114].answers);
+      console.log("answerlar", res.data.data[106].answers);
       setState((prev) => ({ ...prev, questions: res.data.data }));
     });
   }, []);
 
   const addAnswer = (ans) => {
-    const status = isTrue(ans) === undefined ? false : true;
+    const exist = answers.find((f) => f.title === ans);
 
-    setState((prev) => ({
-      ...prev,
-      answers: [...prev.answers, { title: ans, status }],
-    }));
+    if (exist && exist.status) {
+      alert("Aynı cevap yazılamaz.");
+    } else {
+      const status = isTrue(ans) === undefined ? false : true;
 
-    const trueAnswer = answers.filter((a) => a.status).length;
-    console.log("trueanswer", trueAnswer);
+      setState((prev) => ({
+        ...prev,
+        answers: [...prev.answers, { title: ans, status }],
+      }));
 
-    if (trueAnswer === questions[questionIndex].answers.length) {
-      alert("asdsad");
-      showQuestionToast(
-        "Hey",
-        "Sonraki soruya gecmek ister misiniz ?",
-        null,
-        handleToastQuestion(),
-        null
+      const trueAnswer = answers.filter((a) => a.status).length;
+      console.log("trueanswer", trueAnswer);
+      console.log(
+        "find message",
+        answers.find((f) => f.title === ans)
       );
+
+      if (trueAnswer === questions[questionIndex].answers.length) {
+        alert("cevap bitti");
+        showQuestionToast(
+          "Hey",
+          "Sonraki soruya gecmek ister misiniz ?",
+          null,
+          handleToastQuestion(),
+          null
+        );
+      }
     }
   };
   const handleSubmit = () => {
+    if (userAnswer.trim() === "") {
+      alert("Boş Geçilemez.");
+      return;
+    }
     addAnswer(userAnswer);
     setUserAnswer("");
     setIsLoading(true);
@@ -75,14 +89,12 @@ const GameBodyContent = () => {
   };
 
   const handleToastQuestion = () => {
-    if (questionIndex < questions.length) {
-      // state((prev) => prev + 1);
-
-      // setState((prev) => ({ ...prev, questionIndex }));
-      
+    if (questionIndex < questions.length - 1) {
+      //state((prev) => prev + 1);
+      setState((prev) => ({ ...prev, questionIndex: prev.questionIndex + 1 }));
       // setAnswer("");
     } else {
-      console.log("alert");
+      alert("method soru bitti");
     }
   };
   return (
@@ -105,6 +117,7 @@ const GameBodyContent = () => {
       {/* Game Question Box End */}
 
       {/* Game Body Question Answer start */}
+
       <div
         className="row"
         style={{
@@ -115,29 +128,29 @@ const GameBodyContent = () => {
         }}
       >
         <div
-          className="col-md-5 questionBody justify-content-between "
+          className="col-md-12 questionBody justify-content-between "
           style={{
             backgroundColor: "#dff9fb",
-            minHeight: 300,
+
             borderRadius: 10,
-            display: "flex",
           }}
         >
-          <div className="col-md-2 justify-content-between ">
-            {loading && (
-              <div>
-                <img
-                  src="https://i.pinimg.com/originals/71/94/64/719464cf88c8e2ef95107b96f5adf2d3.gif"
-                  width="50"
-                  alt=""
-                />
-              </div>
-            )}
+          {/* <div className="col-md-2 justify-content-between ">
+          {loading && (
+            <div>
+              <img
+                src="https://i.pinimg.com/originals/71/94/64/719464cf88c8e2ef95107b96f5adf2d3.gif"
+                width="50"
+                alt=""
+              />
+            </div>
+          )}
+        </div> */}
+          <div style={{ width: "100%" }}>
+            {answers.map((answer, index) => (
+              <AnswersItem key={index} answer={answer} index={index} />
+            ))}
           </div>
-
-          {answers.map((answer, index) => (
-            <AnswersItem key={index} answer={answer} index={index} />
-          ))}
         </div>
       </div>
       <div className="row">
