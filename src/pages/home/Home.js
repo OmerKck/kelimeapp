@@ -65,7 +65,7 @@ const Home = () => {
                 <img
                   src="https://img.icons8.com/bubbles/100/000000/administrator-male.png"
                   className="img-lg rounded-circle mb-2"
-                  alt="profile image"
+                  alt="profile"
                 />
                 <label className="d-flex justify-content-center align-center">
                   Level 10
@@ -84,7 +84,7 @@ const Home = () => {
                 <img
                   src={require("../../assets/images/kelimeVS.png")}
                   className="img-lg rounded-circle mb-2"
-                  alt="profile image"
+                  alt="profile"
                   width="100%"
                   height="100%"
                 />
@@ -98,7 +98,7 @@ const Home = () => {
                 <img
                   src="https://img.icons8.com/bubbles/100/000000/indian-lady.png"
                   className="img-lg rounded-circle mb-2"
-                  alt="profile image"
+                  alt="profile"
                   width="100%"
                   height="100%"
                 />
