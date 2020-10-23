@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import SideBar from "../../components/SideBar";
+import { getUsers } from "../../service/kelimeApiService";
 
 const Home = () => {
   const history = useHistory();
-  const [user, setuser] = useState("");
+  const [user, setuser] = useState(null);
+
   useEffect(() => {
     if (localStorage.user) {
-      setuser(JSON.parse(localStorage.user));
+      const usr = JSON.parse(localStorage.user);
+      setuser(usr);
+
+      getUsers(usr.id)
+        .then((res) =>
+          setuser((prev) => ({ ...prev, profile: res.data.data.profile }))
+        )
+        .catch((err) => console.log(err));
     }
   }, []);
+
   const handleSubmit = () => {
     history.push("/game");
   };
   return (
     <div className="container m-0 p-0">
       <div className="row">
-        <div className="col-md-3">
-          <SideBar user={user} />
-        </div>
-        <div className="container col-md-9">
+        <div className="col-md-4">{user && <SideBar user={user} />}</div>
+        <div className="container col-md-8">
           <div className="row ">
             <div
               className="col-md-12  "
@@ -72,7 +80,7 @@ const Home = () => {
                 </label>
                 <br />
                 <label className="d-flex justify-content-center align-center">
-                  {user.name}
+                  {user?.name}
                 </label>
               </div>
             </div>

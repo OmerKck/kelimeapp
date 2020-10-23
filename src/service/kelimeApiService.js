@@ -28,7 +28,16 @@ export const checkToken = () => {
 };
 
 export const categories = () => {
-  return axios.get(BaseUrl + "/categories");
+  const token = localStorage.token;
+  return axios.get(
+    BaseUrl + "/categories",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 export const categoryCreate = (name) => {
   return axios.post(BaseUrl + "/categories", { name });
@@ -69,4 +78,9 @@ export const questionUpdate = (id, content, category_id, answers) => {
 
 export const questionDelete = (id) => {
   return axios.delete(BaseUrl + `/questions/${id}`);
+};
+
+/* Users and User Profiles */
+export const getUsers = (id) => {
+  return axios.get(BaseUrl + `/users/${id}`);
 };

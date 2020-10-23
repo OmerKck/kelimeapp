@@ -3,8 +3,7 @@ import { useHistory } from "react-router-dom";
 import toast from "izitoast";
 import { login } from "../../service/kelimeApiService";
 
-const Login = () => 
-{
+const Login = () => {
   const [values, setValues] = useState({ email: "", password: "" });
   const { email, password } = values;
   const history = useHistory();
@@ -32,6 +31,7 @@ const Login = () =>
       .then((res) => {
         localStorage.setItem("token", res.data.access_token);
         localStorage.setItem("user", JSON.stringify(res.data));
+        console.log("reslogin", res);
         console.log("1-login");
         history.push("/");
       })
@@ -44,7 +44,6 @@ const Login = () =>
       });
   };
   return (
-  
     <div className="landing">
       {/* LANDING DECORATION */}
       <div className="landing-decoration" />

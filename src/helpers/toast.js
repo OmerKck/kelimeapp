@@ -5,7 +5,7 @@ export const showQuestionToast = (
   message,
   position = "center",
   cb = null,
-  cb2 = null
+  cbRedirect = null
 ) => {
   toast.question({
     timeout: 10000,
@@ -32,16 +32,20 @@ export const showQuestionToast = (
           instance.hide({ transitionOut: "fadeOut" }, toast, "button");
           //TODO:loading ekranı
 
-          cb2();
+          window.location.pathname = cbRedirect;
         },
       ],
     ],
     onClosing: function (instance, toast, closedBy) {
-      console.info("Closing | closedBy: " + closedBy);
+      // console.info("Closing | closedBy: " + closedBy);
     },
     onClosed: function (instance, toast, closedBy) {
-      console.info("Closed | closedBy: " + closedBy);
-      console.log(instance);
+      // console.info("Closed | closedBy: " + closedBy);
+      // console.log(instance);
     },
   });
+};
+
+export const ShowWarning = (title, position) => {
+  toast.warning({ title, position });
 };
