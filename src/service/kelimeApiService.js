@@ -31,7 +31,7 @@ export const categories = () => {
   const token = localStorage.token;
   return axios.get(
     BaseUrl + "/categories",
-    {},
+
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -40,47 +40,109 @@ export const categories = () => {
   );
 };
 export const categoryCreate = (name) => {
-  return axios.post(BaseUrl + "/categories", { name });
+  const token = localStorage.token;
+  return axios.post(
+    BaseUrl + "/categories",
+    { name },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 export const categoryGetByid = (id) => {
-  return axios.get(BaseUrl + `/categories/${id}`);
+  const token = localStorage.token;
+  return axios.get(BaseUrl + `/categories/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 export const categoryUpdate = (id, name) => {
-  return axios.put(BaseUrl + `/categories/${id}`, { name });
+  const token = localStorage.token;
+  return axios.put(
+    BaseUrl + `/categories/${id}`,
+    { name },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 export const categoryDelete = (id) => {
-  return axios.delete(BaseUrl + `/categories/${id}`);
+  const token = localStorage.token;
+  return axios.delete(BaseUrl + `/categories/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 /* Questions */
 export const getQuestions = () => {
+  const token = localStorage.token;
   return axios.get(BaseUrl + "/questions");
 };
 export const questionCreate = (content, category_id, answers) => {
-  return axios.post(BaseUrl + "/questions", {
-    content,
-    category_id,
-    answers,
-  });
+  const token = localStorage.token;
+  return axios.post(
+    BaseUrl + "/questions",
+    {
+      content,
+      category_id,
+      answers,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 export const questionGetById = (id) => {
-  return axios.get(BaseUrl + `/questions/${id}`);
-};
-
-export const questionUpdate = (id, content, category_id, answers) => {
-  return axios.put(BaseUrl + `/questions/${id}`, {
-    content,
-    category_id,
-    answers,
+  const token = localStorage.token;
+  return axios.get(BaseUrl + `/questions/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 
+export const questionUpdate = (id, content, category_id, answers) => {
+  const token = localStorage.token;
+  return axios.put(
+    BaseUrl + `/questions/${id}`,
+    {
+      content,
+      category_id,
+      answers,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
 export const questionDelete = (id) => {
-  return axios.delete(BaseUrl + `/questions/${id}`);
+  const token = localStorage.token;
+  return axios.delete(BaseUrl + `/questions/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 /* Users and User Profiles */
 export const getUsers = (id) => {
-  return axios.get(BaseUrl + `/users/${id}`);
+  const token = localStorage.token;
+  return axios.get(BaseUrl + `/users/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

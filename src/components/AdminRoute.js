@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { checkToken } from "../service/kelimeApiService";
 const AdminRoute = (props) => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  // const [user, setUser] = useState("");
+
   const { rest, component: Component } = props;
 
   useEffect(() => {
     checkToken()
       .then((res) => {
+        console.log("res admin", res.data.admin);
         if (res.status === 200) {
-          setIsAuth(true);
-          localStorage.setItem("user", JSON.stringify(res.data));
-          console.log("adminRoute", JSON.parse(localStorage.user).admin);
+          if (res.data.admin) {
+            setIsAdmin(true);
+          }
         }
       })
       .catch((err) => console.log(err))
@@ -25,11 +26,7 @@ const AdminRoute = (props) => {
       <Route
         {...rest}
         render={(props) =>
-          isAuth && JSON.parse(localStorage.user).admin !== 1 ? (
-            <Redirect to="/" />
-          ) : (
-            <Component {...props} />
-          )
+          !isAdmin ? <Redirect to="/" /> : <Component {...props} />
         }
       />
     );

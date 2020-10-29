@@ -4,7 +4,6 @@ import { checkToken } from "../service/kelimeApiService";
 const PrivateRoute = (props) => {
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(true);
-
   const { rest, component: Component } = props;
 
   useEffect(() => {

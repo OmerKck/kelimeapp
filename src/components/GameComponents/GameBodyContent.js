@@ -10,14 +10,14 @@ const GameBodyContent = () => {
 
   const [state, setState] = useState({
     questions: [],
-    questionIndex: 114,
+    questionIndex: 3,
     answers: [],
   });
   const { questions, questionIndex, answers } = state;
 
   useEffect(() => {
     getQuestions().then((res) => {
-      console.log("answerlar", res.data.data[106].answers);
+      // console.log("answerlar", res.data.data[questionIndex].answers);
       setState((prev) => ({ ...prev, questions: res.data.data }));
     });
   }, []);
@@ -57,7 +57,13 @@ const GameBodyContent = () => {
     }
     return duplicate;
   };
-  const handleSubmit = () => {
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (userAnswer.trim() === "") {
       ShowWarning("Cevap boş geçilemez !", "topRight");
       return;
@@ -97,29 +103,12 @@ const GameBodyContent = () => {
   const handleToastQuestion = () => {
     // console.log("cevaplar", questions[questionIndex].answers.length);
     console.log("deneme", questions[questionIndex + 1].answers.length);
-    
+
     setState((prev) => ({
       ...prev,
       questionIndex: prev.questionIndex + 1,
       answers: [],
     }));
-    // do {
-    //   setState((prev) => ({
-    //     ...prev,
-    //     questionIndex: prev.questionIndex + 1,
-    //     answers: [],
-    //   }));
-    //   console.log("qi", questionIndex);
-    // } while (questions[questionIndex].answers.length !== 0);
-
-    // while (questions[questionIndex + 1].answers.length === 0) {
-    //   setState((prev) => ({
-    //     ...prev,
-    //     questionIndex: prev.questionIndex + 1,
-    //     answers: [],
-    //   }));
-    //   console.log("qi", questionIndex);
-    // }
   };
 
   return (
@@ -166,6 +155,7 @@ const GameBodyContent = () => {
             className="col-md-10 text-center"
             onChange={(e) => setUserAnswer(e.target.value)}
             value={userAnswer}
+            onKeyDown={(e) => handleKeyDown(e)}
             autoComplete="off"
 
             //disabled={userAnswer == ""}
